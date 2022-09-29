@@ -9,16 +9,16 @@ const port = process.env.PORT || 3001;
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 465,
-    secure: false, // true for 465, false for other ports
+    secure: true, // true for 465, false for other ports
     auth: {
-        user: "matheus.pimentel@sgnsistemas.com.br",
-        pass: "Mts25226"
+        user: "sac@sgnsistemas.com.br",
+        pass: "inova*@78#q)hRj)p-071"
     },
     tls: { rejectUnauthorized: false }
   });
 
   const mailOptions = {
-    from: 'matheus.pimentel@sgnsistemas.com.br',
+    from: 'sac@sgnsistemas.com.br',
     to: 'matheus.007brasil@gmail.com',
     subject: 'E-mail enviado usando Node!',
     text: 'Bem fácil, não? ;)'

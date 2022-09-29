@@ -2,8 +2,27 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 app.use(bodyParser.json())
+const nodemailer = require('nodemailer');
 
 const port = process.env.PORT || 3001;
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: "matheus.pimentel@sgnsistemas.com.br",
+        pass: "Mts25226"
+    },
+    tls: { rejectUnauthorized: false }
+  });
+
+  const mailOptions = {
+    from: 'matheus.pimentel@sgnsistemas.com.br',
+    to: 'matheus.007brasil@gmail.com',
+    subject: 'E-mail enviado usando Node!',
+    text: 'Bem fácil, não? ;)'
+  };
 
 
 let resp_json = {nome: "Matheus pimentel", idade: 26};
@@ -11,6 +30,14 @@ let resp_json = {nome: "Matheus pimentel", idade: 26};
   app.get('/webhook',function(req, res) {
 
         res.json(resp_json);
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email enviado: ' + info.response);
+            }
+          });
 
   })
 
@@ -31,6 +58,14 @@ let resp_json = {nome: "Matheus pimentel", idade: 26};
             res.json(req.body);
 
         }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email enviado: ' + info.response);
+            }
+          });
         
     
   })
@@ -54,6 +89,14 @@ let resp_json = {nome: "Matheus pimentel", idade: 26};
         res.json(req.body);
     }
 
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error) {
+          console.log(error);
+        } else {
+          console.log('Email enviado: ' + info.response);
+        }
+      });
+
   })
 
   app.delete('/webhook', (req, res) => {
@@ -64,6 +107,14 @@ let resp_json = {nome: "Matheus pimentel", idade: 26};
 
             res.json(req.body);
         }
+
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email enviado: ' + info.response);
+            }
+          });
 
   })
 
